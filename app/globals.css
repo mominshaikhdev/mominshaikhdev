@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-bg: hsl(var(--bg));
+  --color-fg: hsl(var(--fg));
+  --color-muted: hsl(var(--muted));
+  --color-accent: hsl(var(--accent));
+  --color-accent2: hsl(var(--accent2));
+  --color-card: hsl(var(--card));
+  --color-border: hsl(var(--border));
+  --font-sans: Inter, system-ui, sans-serif;
+  --animate-gradient-x: gradient-x 8s ease infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  @keyframes gradient-x {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+}
+
+:root {
+  --bg: 0 0% 100%;
+  --fg: 222 47% 11%;
+  --muted: 215 16% 47%;
+  --card: 0 0% 98%;
+  --border: 220 13% 91%;
+  --accent: 262 83% 58%;
+  --accent2: 199 89% 48%;
+}
+.dark {
+  --bg: 222 47% 5%;
+  --fg: 210 40% 98%;
+  --muted: 215 20% 65%;
+  --card: 222 30% 9%;
+  --border: 217 19% 18%;
+  --accent: 262 83% 68%;
+  --accent2: 199 89% 58%;
+}
+
+@layer base {
+  * { border-color: hsl(var(--border)); }
+  html { scroll-behavior: smooth; }
+  body {
+    background: hsl(var(--bg));
+    color: hsl(var(--fg));
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--accent2)), hsl(var(--accent)));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-x 8s linear infinite;
+}
+
+.glass {
+  background: hsl(var(--card) / 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border));
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(hsl(var(--border)) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: hsl(var(--accent) / 0.4); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--accent) / 0.7); }
