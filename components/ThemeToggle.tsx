@@ -15,7 +15,11 @@ export default function ThemeToggle() {
       onClick={() => setTheme(dark ? "light" : "dark")}
       className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card transition hover:scale-110 hover:border-accent"
     >
-      {dark ? <Sun className="h-4 w-4 text-accent" /> : <Moon className="h-4 w-4 text-accent" />}
+      {dark ? (
+        <Sun className="h-4 w-4 text-accent" />
+      ) : (
+        <Moon className="h-4 w-4 text-accent" />
+      )}
     </button>
   );
 }

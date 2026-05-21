@@ -1,6 +1,13 @@
 "use client";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, Sphere, Stars, Torus, Icosahedron } from "@react-three/drei";
+import {
+  Float,
+  MeshDistortMaterial,
+  Sphere,
+  Stars,
+  Torus,
+  Icosahedron,
+} from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
 import { useTheme } from "next-themes";
@@ -41,13 +48,23 @@ function Ring() {
   return (
     <Float speed={2} rotationIntensity={0.8} floatIntensity={1.2}>
       <Torus ref={ref} args={[2.2, 0.025, 16, 200]} position={[0, 0, -1]}>
-        <meshStandardMaterial color="#22d3ee" emissive="#22d3ee" emissiveIntensity={0.6} />
+        <meshStandardMaterial
+          color="#22d3ee"
+          emissive="#22d3ee"
+          emissiveIntensity={0.6}
+        />
       </Torus>
     </Float>
   );
 }
 
-function FloatingShard({ position, color }: { position: [number, number, number]; color: string }) {
+function FloatingShard({
+  position,
+  color,
+}: {
+  position: [number, number, number];
+  color: string;
+}) {
   const ref = useRef<THREE.Mesh>(null);
   useFrame((s) => {
     if (!ref.current) return;
@@ -57,7 +74,12 @@ function FloatingShard({ position, color }: { position: [number, number, number]
   return (
     <Float speed={1.8} floatIntensity={2.5} rotationIntensity={1.5}>
       <Icosahedron ref={ref} args={[0.18, 0]} position={position}>
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.4} wireframe />
+        <meshStandardMaterial
+          color={color}
+          emissive={color}
+          emissiveIntensity={0.4}
+          wireframe
+        />
       </Icosahedron>
     </Float>
   );
@@ -71,7 +93,15 @@ function MouseLight() {
     ref.current.position.x = (mouse.x * viewport.width) / 2;
     ref.current.position.y = (mouse.y * viewport.height) / 2;
   });
-  return <pointLight ref={ref} position={[0, 0, 2]} intensity={2} color="#a855f7" distance={6} />;
+  return (
+    <pointLight
+      ref={ref}
+      position={[0, 0, 2]}
+      intensity={2}
+      color="#a855f7"
+      distance={6}
+    />
+  );
 }
 
 export default function ThreeScene() {

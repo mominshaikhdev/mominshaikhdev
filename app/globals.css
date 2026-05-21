@@ -14,12 +14,22 @@
   --animate-gradient-x: gradient-x 8s ease infinite;
   --animate-float: float 6s ease-in-out infinite;
   @keyframes gradient-x {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
   }
 }
 
@@ -43,8 +53,12 @@
 }
 
 @layer base {
-  * { border-color: hsl(var(--border)); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: hsl(var(--border));
+  }
+  html {
+    scroll-behavior: auto;
+  }
   body {
     background: hsl(var(--bg));
     color: hsl(var(--fg));
@@ -54,7 +68,12 @@
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--accent2)), hsl(var(--accent)));
+  background: linear-gradient(
+    90deg,
+    hsl(var(--accent)),
+    hsl(var(--accent2)),
+    hsl(var(--accent))
+  );
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -73,9 +92,21 @@
     linear-gradient(hsl(var(--border)) 1px, transparent 1px),
     linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px);
   background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 60% 60% at 50% 0%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(
+    ellipse 60% 60% at 50% 0%,
+    #000 40%,
+    transparent 100%
+  );
 }
 
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-thumb { background: hsl(var(--accent) / 0.4); border-radius: 8px; }
-::-webkit-scrollbar-thumb:hover { background: hsl(var(--accent) / 0.7); }
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--accent) / 0.4);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--accent) / 0.7);
+}

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
 
@@ -9,38 +9,145 @@ const links = [
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },
   { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" }
+  { href: "#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("");
+
+  // scroll glass effect
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // IntersectionObserver: auto-highlight active section
+  useEffect(() => {
+    const sectionIds = links.map((l) => l.href.slice(1));
+    const observers: IntersectionObserver[] = [];
+
+    const visible = new Map<string, number>();
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            visible.set(id, entry.intersectionRatio);
+          } else {
+            visible.delete(id);
+          }
+
+          if (visible.size > 0) {
+            const best = [...visible.entries()].sort(
+              (a, b) => b[1] - a[1],
+            )[0][0];
+            setActive(`#${best}`);
+          }
+        },
+        { threshold: [0, 0.15, 0.5], rootMargin: "-64px 0px -35% 0px" },
+      );
+
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  const rafScroll = useCallback((targetY: number) => {
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    if (Math.abs(distance) < 1) return;
+    const duration = 380;
+    let startTime: number | null = null;
+
+    const ease = (t: number) => 1 - Math.pow(1 - t, 4);
+
+    const step = (ts: number) => {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      window.scrollTo(0, startY + distance * ease(progress));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, []);
+
+  // single-click smooth scroll
+  const handleNav = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      e.preventDefault();
+      setOpen(false);
+      const id = href.slice(1);
+      const el = document.getElementById(id);
+      if (!el) return;
+      const navH = 72;
+      const targetY = el.getBoundingClientRect().top + window.scrollY - navH;
+      rafScroll(targetY);
+      setActive(href);
+    },
+    [rafScroll],
+  );
+
   return (
     <header
-      className={`fixed top-0 z-50 w-full transition-all ${
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         scrolled ? "glass" : "bg-transparent"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        {/* Logo */}
         <Link href="/" className="text-lg font-bold tracking-tight">
           <span className="gradient-text">Momin</span> Shaikh
         </Link>
-        <div className="hidden items-center gap-8 md:flex">
-          {links.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm text-muted transition hover:text-fg">
-              {l.label}
-            </a>
-          ))}
+
+        {/* Desktop links */}
+        <div className="hidden items-center gap-1 md:flex">
+          {links.map((l) => {
+            const isActive = active === l.href;
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={(e) => handleNav(e, l.href)}
+                className={`
+                  relative px-4 py-2 text-sm font-medium rounded-full
+                  transition-all duration-200
+                  ${isActive ? "text-fg" : "text-muted hover:text-fg"}
+                  group
+                `}
+              >
+                {/* Active pill */}
+                {isActive && (
+                  <span className="absolute inset-0 rounded-full bg-accent/15 border border-accent/30" />
+                )}
+
+                {/* Hover underline */}
+                <span
+                  className={`
+                    absolute bottom-1.5 left-4 right-4 h-px rounded-full
+                    bg-gradient-to-r from-accent to-accent2
+                    transition-all duration-300
+                    ${isActive ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0 group-hover:opacity-60 group-hover:scale-x-100"}
+                  `}
+                />
+
+                <span className="relative">{l.label}</span>
+              </a>
+            );
+          })}
         </div>
+
+        {/* Right controls */}
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <button
-            className="md:hidden rounded-full border border-border p-2"
+            className="md:hidden rounded-full border border-border p-2 transition hover:border-accent"
             onClick={() => setOpen(!open)}
             aria-label="Menu"
           >
@@ -48,18 +155,33 @@ export default function Navbar() {
           </button>
         </div>
       </nav>
+
+      {/* Mobile menu */}
       {open && (
-        <div className="glass mx-4 mb-4 rounded-2xl p-4 md:hidden">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="block py-2 text-sm text-muted hover:text-fg"
-            >
-              {l.label}
-            </a>
-          ))}
+        <div className="glass mx-4 mb-4 rounded-2xl p-2 md:hidden">
+          {links.map((l) => {
+            const isActive = active === l.href;
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={(e) => handleNav(e, l.href)}
+                className={`
+                  flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm transition-all duration-150
+                  ${
+                    isActive
+                      ? "bg-accent/15 text-fg font-medium"
+                      : "text-muted hover:bg-card hover:text-fg"
+                  }
+                `}
+              >
+                {isActive && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                )}
+                {l.label}
+              </a>
+            );
+          })}
         </div>
       )}
     </header>

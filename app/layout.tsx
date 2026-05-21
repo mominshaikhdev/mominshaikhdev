@@ -11,11 +11,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Momin Shaikh — Full-Stack Engineer",
     description: "Full-stack engineer • React, Next.js, Laravel, AI/RAG",
-    type: "website"
-  }
+    type: "website",
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>

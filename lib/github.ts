@@ -9,6 +9,7 @@ export type Repo = {
   stargazers_count: number;
   forks_count: number;
   pushed_at: string;
+  created_at: string;
   fork: boolean;
   archived: boolean;
 };
@@ -33,10 +34,9 @@ export function gradientFor(name: string) {
 export async function getRepos(username = "mominshaikhdev"): Promise<Repo[]> {
   try {
     const res = await fetch(
-      `https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`,
+      `https://api.github.com/users/${username}/repos?per_page=100&sort=created`,
       {
         headers: { Accept: "application/vnd.github+json" },
-        // ISR: refresh hourly so new repos appear automatically
         next: { revalidate: 3600 }
       }
     );
@@ -44,7 +44,7 @@ export async function getRepos(username = "mominshaikhdev"): Promise<Repo[]> {
     const data = (await res.json()) as Repo[];
     return data
       .filter((r) => !r.fork && !r.archived)
-      .sort((a, b) => +new Date(b.pushed_at) - +new Date(a.pushed_at));
+      .sort((a, b) => +new Date(b.created_at) - +new Date(a.created_at));
   } catch {
     return [];
   }
