@@ -104,11 +104,17 @@ I'm a full-stack engineer specialising in **scalable web applications**, **AI-po
 
 ## Experience
 
-**Full-Stack Engineer** : Independent / Open Source &nbsp;*(2020 – Present)*
-Architecting multi-tenant SaaS platforms, RAG-powered AI products, and real-time collaborative apps using Laravel and Django for backend APIs. Containerises services with Docker, orchestrates via Kubernetes, and ships with full CI/CD pipelines (GitHub Actions). Integrates Sentry for observability and applies MLOps practices for model versioning. Uses Redis for caching and pub/sub; builds vector-search features with Pinecone/Qdrant and LangGraph-based agent workflows.
+**Independent | Open-Source Developer** &nbsp;*(2020 – Present)*
+- Architecting agentic AI systems, multi-tenant SaaS platforms, RAG applications, and real-time collaborative workspaces using Next.js 16, React 19, Node.js, Express, Django, and Laravel.
+- Built **CodeFusion Research Agent** using Google Gemini 2.0 Flash function calling to autonomously analyze codebases and answer complex technical queries.
+- Engineered **Collaborative Team Hub** with dual-database architecture (PostgreSQL + MongoDB), Socket.IO real-time channels, JWT auth with refresh interceptors, and RBAC workflows.
+- Shipped **Bookified** — a production RAG PDF voice & chat platform powered by OpenAI Whisper, TTS, LangChain, and Vercel AI SDK streaming.
+- Maintained active open-source repositories and automated CI/CD deployments on Vercel and Railway.
 
-**Intern Lawyer** : Judge Court Kushtia &nbsp;*(March 2026 – Present)*
-Assists in case preparation, legal research, and document drafting in a high-volume district court environment.
+**WebFlow Developer** : Flow Seek &nbsp;*(2020 – 2023)*
+- Designed and delivered 20+ responsive web applications and landing pages, converting complex Figma wireframes into pixel-perfect production builds.
+- Built reusable Webflow CMS architectures for non-technical stakeholders, streamlining post-launch content management.
+- Implemented performance optimization and SEO fundamentals (semantic HTML, structured data, schema markup, micro-animations) achieving 90+ Core Web Vitals scores.
 
 ---
 
