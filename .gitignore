@@ -1,6 +1,33 @@
+# dependencies
 node_modules
-.next
-out
+/.pnpm-store
+
+# next.js build output
+.next/
+/out/
+/build/
+
+# environment variables
+.env
 .env*.local
-.DS_Store
+.env.development.local
+.env.test.local
+.env.production.local
+
+# logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# system & OS
+.DS_Store
+*.pem
+Thumbs.db
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+

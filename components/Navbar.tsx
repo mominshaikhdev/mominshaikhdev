@@ -2,13 +2,14 @@
 import Link from "next/link";
 import { useEffect, useState, useCallback } from "react";
 import ThemeToggle from "./ThemeToggle";
-import { Menu, X } from "lucide-react";
+import { Menu, X, FileText, Download } from "lucide-react";
 
 const links = [
   { href: "#about", label: "About" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },
   { href: "#experience", label: "Experience" },
+  { href: "#education", label: "Education" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -28,7 +29,6 @@ export default function Navbar() {
   useEffect(() => {
     const sectionIds = links.map((l) => l.href.slice(1));
     const observers: IntersectionObserver[] = [];
-
     const visible = new Map<string, number>();
 
     sectionIds.forEach((id) => {
@@ -97,7 +97,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "glass" : "bg-transparent"
+        scrolled ? "glass border-b border-border/50" : "bg-transparent"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -116,7 +116,7 @@ export default function Navbar() {
                 href={l.href}
                 onClick={(e) => handleNav(e, l.href)}
                 className={`
-                  relative px-4 py-2 text-sm font-medium rounded-full
+                  relative px-3.5 py-2 text-sm font-medium rounded-full
                   transition-all duration-200
                   ${isActive ? "text-fg" : "text-muted hover:text-fg"}
                   group
@@ -130,7 +130,7 @@ export default function Navbar() {
                 {/* Hover underline */}
                 <span
                   className={`
-                    absolute bottom-1.5 left-4 right-4 h-px rounded-full
+                    absolute bottom-1.5 left-3.5 right-3.5 h-px rounded-full
                     bg-gradient-to-r from-accent to-accent2
                     transition-all duration-300
                     ${isActive ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0 group-hover:opacity-60 group-hover:scale-x-100"}
@@ -145,7 +145,17 @@ export default function Navbar() {
 
         {/* Right controls */}
         <div className="flex items-center gap-3">
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            download="Momin_Shaikh_Resume.pdf"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-xs font-semibold text-accent transition hover:bg-accent hover:text-white"
+          >
+            <Download className="h-3.5 w-3.5" /> Resume
+          </a>
+
           <ThemeToggle />
+
           <button
             className="md:hidden rounded-full border border-border p-2 transition hover:border-accent"
             onClick={() => setOpen(!open)}
@@ -158,7 +168,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="glass mx-4 mb-4 rounded-2xl p-2 md:hidden">
+        <div className="glass mx-4 mb-4 rounded-2xl p-3 md:hidden space-y-1">
           {links.map((l) => {
             const isActive = active === l.href;
             return (
@@ -182,6 +192,17 @@ export default function Navbar() {
               </a>
             );
           })}
+
+          <div className="pt-2 border-t border-border/50">
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              download="Momin_Shaikh_Resume.pdf"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-medium text-white shadow-md"
+            >
+              <Download className="h-4 w-4" /> Download Resume
+            </a>
+          </div>
         </div>
       )}
     </header>

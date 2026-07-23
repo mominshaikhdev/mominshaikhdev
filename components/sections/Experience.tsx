@@ -1,47 +1,48 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/useGsap";
+import { Building2, MapPin, CheckCircle2 } from "lucide-react";
 
-const items = [
+const experiences = [
   {
-    role: "Full-Stack Engineer",
-    org: "Independent / Open Source",
-    time: "2020 – Present",
+    role: "Independent | Open-Source Developer",
+    organization: "Self-Directed",
+    location: "Remote",
+    period: "2020 – Present",
+    tagline: "Building Agentic AI, Multi-Tenant SaaS & Real-Time Web Systems",
     points: [
-      "Architected multi-tenant SaaS platforms with strict data isolation and RBAC, using Laravel and Django for robust backend APIs.",
-      "Shipped RAG-powered AI products integrating LangChain, LangGraph, OpenAI and Vercel AI SDK with vector database retrieval (Pinecone / Qdrant).",
-      "Built real-time collaborative apps with Socket.IO and optimistic UI patterns.",
-      "Containerised services with Docker and orchestrated workloads via Kubernetes; deployed to AWS/GCP with full CI/CD pipelines (GitHub Actions).",
-      "Integrated Sentry for error monitoring and implemented MLOps practices for model versioning and observability.",
-      "Used Redis for caching, session management, and pub/sub in high-throughput APIs.",
+      "Designed and shipped multiple full-stack open-source projects spanning agentic AI systems, SaaS platforms, real-time collaboration tools, and multi-tenant architectures — entirely self-directed.",
+      "Built CodeFusion Research Agent — a Django/Next.js AI agent using Google Gemini 2.0 Flash function calling to autonomously explore GitHub repositories and answer deep technical questions.",
+      "Engineered Collaborative Team Hub with dual-database architecture (PostgreSQL + MongoDB), real-time Socket.IO, JWT auth with transparent refresh interceptor, RBAC, and Kanban workflows deployed on Railway.",
+      "Shipped Bookified — a production RAG PDF voice & chat platform powered by OpenAI Whisper, TTS, LangChain, and Vercel AI SDK streaming with Stripe subscriptions.",
+      "Contributed reusable, well-documented codebases to GitHub; maintained production deployments on Vercel and Railway with automated CI/CD pipelines.",
     ],
   },
   {
-    role: "Intern Lawyer",
-    org: "Judge Court Kushtia",
-    time: "March 2026 – Present",
+    role: "WebFlow Developer",
+    organization: "Flow Seek",
+    location: "Khulna, Bangladesh",
+    period: "2020 – 2023",
+    tagline: "Client Web Engineering, Webflow CMS & Custom JS Integrations",
     points: [
-      "High-volume district court environment; case prep, legal research and drafting.",
-      "Sharpened analytical and argumentation skills via precedent and statute analysis.",
-    ],
-  },
-  {
-    role: "LL.B (Hon's) — Al-Fiqh and Law",
-    org: "Islamic University, Kushtia-Jhenaidah",
-    time: "2019 – 2023",
-    points: [
-      "CGPA: 3.28 / 4.00. Strong analytical foundation in philosophy and physics.",
+      "Designed and built 20+ responsive marketing websites and landing pages in Webflow for clients across e-commerce, real estate, and local service industries, translating Figma designs into pixel-perfect, production-ready sites.",
+      "Architected reusable Webflow CMS collections (blog, portfolio, case studies, team profiles) that empowered non-technical clients to self-manage content post-launch, reducing recurring developer support requests.",
+      "Implemented custom scroll-triggered animations and micro-interactions using Webflow's native interaction engine, improving on-page engagement.",
+      "Optimized on-page SEO fundamentals — semantic HTML, meta tags, structured data, image compression, and Core Web Vitals — on every project, consistently achieving 90+ Lighthouse scores.",
+      "Extended Webflow's native functionality with custom JavaScript embeds and third-party integrations (Google Analytics, Mailchimp, Stripe payment links, Zapier automations).",
+      "Owned the full client engagement lifecycle — requirements gathering, wireframing, design handoff, staging review, and launch — over a 3-year period.",
     ],
   },
 ];
 
 export default function Experience() {
   const ref = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".exp-item",
-        { x: -50, opacity: 0 },
+        { x: -40, opacity: 0 },
         {
           x: 0,
           opacity: 1,
@@ -73,29 +74,55 @@ export default function Experience() {
       ref={ref}
       className="relative mx-auto max-w-7xl px-6 py-20 md:py-28"
     >
-      <p className="mb-3 text-sm uppercase tracking-widest text-accent">
-        Journey
+      <p className="mb-3 text-sm uppercase tracking-widest text-accent font-semibold">
+        Professional Journey
       </p>
-      <h2 className="text-4xl font-bold md:text-5xl">Experience & Education</h2>
+      <h2 className="text-4xl font-bold md:text-5xl">Work Experience</h2>
+      <p className="mt-4 max-w-2xl text-muted">
+        Hands-on experience delivering production web software, client solutions, and open-source contributions.
+      </p>
 
-      <div className="relative mt-16 pl-8">
-        <span className="exp-line absolute left-2 top-0 h-full w-px bg-gradient-to-b from-accent via-accent2 to-transparent" />
+      <div className="relative mt-16 pl-6 sm:pl-10">
+        {/* Timeline vertical bar */}
+        <span className="exp-line absolute left-2 sm:left-3 top-0 h-full w-0.5 bg-gradient-to-b from-accent via-accent2 to-transparent" />
+
         <div className="space-y-12">
-          {items.map((it) => (
-            <div key={it.role} className="exp-item relative">
-              <span className="absolute -left-7 top-2 h-3 w-3 rounded-full bg-accent shadow-[0_0_0_4px_hsl(var(--accent)/0.2)]" />
-              <div className="text-xs uppercase tracking-widest text-muted">
-                {it.time}
+          {experiences.map((exp) => (
+            <div key={exp.role} className="exp-item relative">
+              {/* Timeline marker */}
+              <span className="absolute -left-6 sm:-left-[31px] top-1.5 h-4 w-4 rounded-full border-2 border-accent bg-bg shadow-[0_0_12px_hsl(var(--accent)/0.5)]" />
+
+              <div className="glass rounded-3xl border border-border p-6 sm:p-8 transition hover:border-accent/60 shadow-md">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="rounded-full bg-accent/10 border border-accent/30 px-3.5 py-1 text-xs font-bold text-accent">
+                      {exp.period}
+                    </span>
+                    <span className="flex items-center gap-1 text-xs font-semibold text-muted">
+                      <MapPin className="h-3.5 w-3.5" /> {exp.location}
+                    </span>
+                  </div>
+                  <span className="text-xs font-semibold text-accent/80 flex items-center gap-1">
+                    <Building2 className="h-3.5 w-3.5" /> {exp.organization}
+                  </span>
+                </div>
+
+                <h3 className="mt-4 text-2xl font-extrabold text-fg">
+                  {exp.role}
+                </h3>
+                <p className="mt-1 text-sm font-medium text-accent">
+                  {exp.tagline}
+                </p>
+
+                <ul className="mt-6 space-y-3">
+                  {exp.points.map((pt, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-muted leading-relaxed">
+                      <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                      <span>{pt}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="mt-1 text-xl font-semibold">{it.role}</h3>
-              <div className="text-sm text-accent">{it.org}</div>
-              <ul className="mt-3 space-y-1.5 text-muted">
-                {it.points.map((p) => (
-                  <li key={p} className="text-sm">
-                    — {p}
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>

@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/useGsap";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Download, Github, Linkedin, Mail, MessageSquare } from "lucide-react";
 
 const ThreeScene = dynamic(() => import("@/components/ThreeScene"), {
   ssr: false,
@@ -83,7 +83,7 @@ export default function Hero() {
     };
   }, []);
 
-  const title = "Full-Stack Engineer".split(" ");
+  const titleWords = "Full-Stack Engineer".split(" ");
 
   return (
     <section ref={root} className="relative min-h-screen overflow-hidden pt-20">
@@ -95,37 +95,87 @@ export default function Hero() {
 
       <div className="hero-content relative mx-auto grid max-w-7xl gap-12 px-6 pt-4 pb-20 md:grid-cols-2 md:items-center">
         <div>
-          <p className="hero-sub mb-4 inline-block rounded-full border border-border bg-card px-4 py-1 text-xs uppercase tracking-widest text-muted">
-            Available for hire
-          </p>
+          <div className="hero-sub mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent shadow-sm">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            Full-Stack & AI Integration Specialist
+          </div>
           <h1 className="hero-title text-5xl font-bold leading-tight md:text-7xl">
             <span className="inline-block">Momin</span>{" "}
             <span className="inline-block">Shaikh</span>
             <br />
-            {title.map((w, i) => (
+            {titleWords.map((w, i) => (
               <span key={i} className="inline-block gradient-text mr-3">
                 {w}
               </span>
             ))}
           </h1>
-          <p className="hero-sub mt-6 max-w-xl text-lg text-muted">
-            I architect production-grade web platforms — multi-tenant systems,
-            RAG-powered AI apps, and real-time collaborative tools using{" "}
-            <b className="text-fg">React, Next.js, Laravel, Django</b> and{" "}
-            <b className="text-fg"> modern AI SDKs.</b>
+          <p className="hero-sub mt-6 max-w-xl text-lg text-muted leading-relaxed">
+            I architect production-grade web platforms — multi-tenant SaaS systems,
+            bounded agentic AI tool loops, RAG applications, and real-time collaborative platforms using{" "}
+            <b className="text-fg font-semibold">React, Next.js, Node.js, Django, Laravel</b> and{" "}
+            <b className="text-fg font-semibold">modern AI SDKs.</b>
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+
+          {/* Action Buttons */}
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              download="Momin_Shaikh_Resume.pdf"
+              className="hero-cta inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-accent/30 transition hover:scale-105"
+            >
+              <Download className="h-4 w-4" /> Download Resume
+            </a>
             <a
               href="#projects"
-              className="hero-cta rounded-full bg-accent px-6 py-3 text-sm font-medium text-white shadow-lg shadow-accent/30 transition hover:scale-105"
+              className="hero-cta rounded-full border border-border bg-card px-6 py-3.5 text-sm font-medium transition hover:scale-105 hover:border-accent"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="hero-cta rounded-full border border-border bg-card px-6 py-3 text-sm font-medium transition hover:scale-105 hover:border-accent"
+              className="hero-cta rounded-full border border-border bg-card px-6 py-3.5 text-sm font-medium transition hover:scale-105 hover:border-accent"
             >
               Get in Touch
+            </a>
+          </div>
+
+          {/* Social Profiles */}
+          <div className="hero-cta mt-8 flex items-center gap-4 text-muted">
+            <span className="text-xs uppercase tracking-wider text-muted font-medium">Connect:</span>
+            <a
+              href="https://github.com/mominshaikhdev"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+              className="rounded-full border border-border bg-card p-2.5 transition hover:border-accent hover:text-accent hover:scale-110"
+            >
+              <Github className="h-4 w-4" />
+            </a>
+            <a
+              href="https://linkedin.com/in/themominshaikh"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="rounded-full border border-border bg-card p-2.5 transition hover:border-accent hover:text-accent hover:scale-110"
+            >
+              <Linkedin className="h-4 w-4" />
+            </a>
+            <a
+              href="mailto:thisismominshaikh@gmail.com"
+              aria-label="Email"
+              className="rounded-full border border-border bg-card p-2.5 transition hover:border-accent hover:text-accent hover:scale-110"
+            >
+              <Mail className="h-4 w-4" />
+            </a>
+            <a
+              href="https://wa.me/8801405374822"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="WhatsApp"
+              className="rounded-full border border-border bg-card p-2.5 transition hover:border-accent hover:text-accent hover:scale-110"
+            >
+              <MessageSquare className="h-4 w-4" />
             </a>
           </div>
         </div>
