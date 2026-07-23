@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/useGsap";
-import { ArrowDown, Download, Github, Linkedin, Mail, MessageSquare } from "lucide-react";
+import { ArrowDown, Download } from "lucide-react";
 
 const ThreeScene = dynamic(() => import("@/components/ThreeScene"), {
   ssr: false,
@@ -56,17 +56,6 @@ export default function Hero() {
         ease: "none",
         scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: 0.5 },
       });
-      gsap.to(".hero-3d", {
-        yPercent: -20,
-        ease: "none",
-        scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: 0.5 },
-      });
-      gsap.to(".hero-content", {
-        yPercent: 15,
-        opacity: 0.4,
-        ease: "none",
-        scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: 0.5 },
-      });
     }, root);
 
     const onMove = (e: MouseEvent) => {
@@ -86,14 +75,14 @@ export default function Hero() {
   const titleWords = "Full-Stack Engineer".split(" ");
 
   return (
-    <section ref={root} className="relative min-h-screen overflow-hidden pt-20">
+    <section ref={root} className="relative min-h-[calc(100vh-5rem)] flex flex-col justify-between overflow-hidden pt-20 pb-4">
       <div className="absolute inset-0 grid-bg parallax-slow" aria-hidden />
       <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-accent/30 blur-3xl parallax-fast" aria-hidden />
       <div className="absolute top-40 -right-20 h-96 w-96 rounded-full bg-accent2/30 blur-3xl parallax-slow" aria-hidden />
       <div className="absolute top-1/3 left-1/4 h-64 w-64 rounded-full bg-fuchsia-500/20 blur-3xl parallax-mid" aria-hidden />
       <div className="absolute bottom-10 right-1/3 h-80 w-80 rounded-full bg-cyan-500/20 blur-3xl parallax-mid" aria-hidden />
 
-      <div className="hero-content relative mx-auto grid max-w-7xl gap-12 px-6 pt-4 pb-20 md:grid-cols-2 md:items-center">
+      <div className="hero-content relative mx-auto my-auto grid w-full max-w-7xl gap-8 px-6 py-6 md:grid-cols-2 md:items-center">
         <div>
           <div className="hero-sub mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent shadow-sm">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -139,45 +128,6 @@ export default function Hero() {
               Get in Touch
             </a>
           </div>
-
-          {/* Social Profiles */}
-          <div className="hero-cta mt-8 flex items-center gap-4 text-muted">
-            <span className="text-xs uppercase tracking-wider text-muted font-medium">Connect:</span>
-            <a
-              href="https://github.com/mominshaikhdev"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="GitHub"
-              className="rounded-full border border-border bg-card p-2.5 transition hover:border-accent hover:text-accent hover:scale-110"
-            >
-              <Github className="h-4 w-4" />
-            </a>
-            <a
-              href="https://linkedin.com/in/themominshaikh"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="LinkedIn"
-              className="rounded-full border border-border bg-card p-2.5 transition hover:border-accent hover:text-accent hover:scale-110"
-            >
-              <Linkedin className="h-4 w-4" />
-            </a>
-            <a
-              href="mailto:thisismominshaikh@gmail.com"
-              aria-label="Email"
-              className="rounded-full border border-border bg-card p-2.5 transition hover:border-accent hover:text-accent hover:scale-110"
-            >
-              <Mail className="h-4 w-4" />
-            </a>
-            <a
-              href="https://wa.me/8801405374822"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="WhatsApp"
-              className="rounded-full border border-border bg-card p-2.5 transition hover:border-accent hover:text-accent hover:scale-110"
-            >
-              <MessageSquare className="h-4 w-4" />
-            </a>
-          </div>
         </div>
 
         <div className="hero-3d relative aspect-square w-full max-w-lg justify-self-center">
@@ -185,13 +135,16 @@ export default function Hero() {
         </div>
       </div>
 
-      <a
-        href="#about"
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-muted"
-        aria-label="Scroll"
-      >
-        <ArrowDown className="h-5 w-5" />
-      </a>
+      <div className="relative flex justify-center pb-2 pt-2">
+        <a
+          href="#about"
+          className="animate-bounce text-muted hover:text-accent transition p-2"
+          aria-label="Scroll"
+        >
+          <ArrowDown className="h-5 w-5" />
+        </a>
+      </div>
     </section>
   );
 }
+

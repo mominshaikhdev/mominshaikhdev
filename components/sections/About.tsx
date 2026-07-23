@@ -9,27 +9,17 @@ export default function About({ repoCount = 0 }: { repoCount?: number }) {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".about-block",
-        { y: 60, opacity: 0 },
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
-          stagger: 0.15,
+          duration: 0.8,
+          stagger: 0.12,
           ease: "power2.out",
           immediateRender: false,
           scrollTrigger: { trigger: ref.current, start: "top 90%", once: true },
         },
       );
-      gsap.to(".about-portrait", {
-        yPercent: -15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ref.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
       gsap.to(".about-blob", {
         yPercent: 20,
         rotate: 25,
@@ -56,11 +46,11 @@ export default function About({ repoCount = 0 }: { repoCount?: number }) {
     <section
       id="about"
       ref={ref}
-      className="relative mx-auto max-w-7xl px-6 py-20 md:py-28"
+      className="relative mx-auto max-w-7xl px-6 py-12 md:py-20"
     >
-      <div className="grid gap-12 md:grid-cols-[auto_1fr] md:items-start">
+      <div className="grid gap-6 md:gap-12 md:grid-cols-[320px_1fr] md:items-start">
         {/* Portrait & Profile Card */}
-        <div className="about-block relative mx-auto h-64 w-64 shrink-0 md:h-80 md:w-80">
+        <div className="about-block relative mx-auto h-64 w-64 shrink-0 md:h-80 md:w-80 md:sticky md:top-28">
           <div
             className="about-blob absolute -inset-4 rounded-full bg-gradient-to-tr from-accent via-accent2 to-cyan-500 opacity-40 blur-2xl"
             aria-hidden
@@ -77,15 +67,15 @@ export default function About({ repoCount = 0 }: { repoCount?: number }) {
         </div>
 
         <div>
-          <p className="about-block mb-3 text-sm uppercase tracking-widest text-accent font-semibold">
+          <p className="about-block mb-2 text-sm uppercase tracking-widest text-accent font-semibold">
             About Me
           </p>
-          <h2 className="about-block text-4xl font-bold md:text-5xl leading-tight">
+          <h2 className="about-block text-3xl font-bold md:text-5xl leading-tight">
             Building scalable web platforms & <span className="gradient-text">intelligent software</span> architecture.
           </h2>
 
           {/* Programming Journey */}
-          <div className="about-block mt-8 rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <div className="about-block mt-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
             <h3 className="flex items-center gap-2.5 text-lg font-bold text-fg">
               <Code2 className="h-5 w-5 text-accent" /> My Programming Journey
             </h3>
@@ -117,7 +107,7 @@ export default function About({ repoCount = 0 }: { repoCount?: number }) {
       </div>
 
       {/* Stats Counter Cards */}
-      <div className="about-block mt-16 grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="about-block mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
         {stats.map((s) => (
           <div
             key={s.l}
