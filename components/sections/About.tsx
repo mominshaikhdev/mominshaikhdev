@@ -46,36 +46,41 @@ export default function About({ repoCount = 0 }: { repoCount?: number }) {
     <section
       id="about"
       ref={ref}
-      className="relative mx-auto max-w-7xl px-6 py-12 md:py-20"
+      className="relative mx-auto max-w-7xl px-6 py-16 md:py-24"
     >
-      <div className="grid gap-6 md:gap-12 md:grid-cols-[320px_1fr] md:items-start">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12 items-start">
         {/* Portrait & Profile Card */}
-        <div className="about-block relative mx-auto h-64 w-64 shrink-0 md:h-80 md:w-80 md:sticky md:top-28">
-          <div
-            className="about-blob absolute -inset-4 rounded-full bg-gradient-to-tr from-accent via-accent2 to-cyan-500 opacity-40 blur-2xl"
-            aria-hidden
-          />
-          <div className="about-portrait relative h-full w-full overflow-hidden rounded-3xl border-2 border-accent/40 shadow-2xl shadow-accent/20 bg-card">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://github.com/mominshaikhdev.png?size=400"
-              alt="Momin Shaikh"
-              className="h-full w-full object-cover"
-              loading="lazy"
+        <div className="lg:col-span-4 lg:sticky lg:top-28 z-10">
+          <div className="about-block relative mx-auto h-64 w-64 sm:h-72 sm:w-72 lg:h-80 lg:w-80">
+            <div
+              className="about-blob absolute -inset-4 rounded-full bg-gradient-to-tr from-accent via-accent2 to-cyan-500 opacity-40 blur-2xl pointer-events-none"
+              aria-hidden
             />
+            <div className="about-portrait relative h-full w-full overflow-hidden rounded-3xl border-2 border-accent/40 shadow-2xl shadow-accent/20 bg-card">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://github.com/mominshaikhdev.png?size=400"
+                alt="Momin Shaikh"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
 
-        <div>
-          <p className="about-block mb-2 text-sm uppercase tracking-widest text-accent font-semibold">
-            About Me
-          </p>
-          <h2 className="about-block text-3xl font-bold md:text-5xl leading-tight">
-            Building scalable web platforms & <span className="gradient-text">intelligent software</span> architecture.
-          </h2>
+        {/* Text & Details Column */}
+        <div className="lg:col-span-8 flex flex-col space-y-6">
+          <div className="about-block">
+            <p className="mb-2 text-sm uppercase tracking-widest text-accent font-semibold">
+              About Me
+            </p>
+            <h2 className="text-3xl font-bold md:text-5xl leading-tight">
+              Building scalable web platforms & <span className="gradient-text">intelligent software</span> architecture.
+            </h2>
+          </div>
 
           {/* Programming Journey */}
-          <div className="about-block mt-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <div className="about-block rounded-2xl border border-border bg-card p-6 shadow-sm">
             <h3 className="flex items-center gap-2.5 text-lg font-bold text-fg">
               <Code2 className="h-5 w-5 text-accent" /> My Programming Journey
             </h3>
@@ -85,7 +90,7 @@ export default function About({ repoCount = 0 }: { repoCount?: number }) {
           </div>
 
           {/* Work I Enjoy */}
-          <div className="about-block mt-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <div className="about-block rounded-2xl border border-border bg-card p-6 shadow-sm">
             <h3 className="flex items-center gap-2.5 text-lg font-bold text-fg">
               <Compass className="h-5 w-5 text-accent" /> The Work I Enjoy
             </h3>
@@ -95,7 +100,7 @@ export default function About({ repoCount = 0 }: { repoCount?: number }) {
           </div>
 
           {/* Interests Outside Coding */}
-          <div className="about-block mt-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <div className="about-block rounded-2xl border border-border bg-card p-6 shadow-sm">
             <h3 className="flex items-center gap-2.5 text-lg font-bold text-fg">
               <Heart className="h-5 w-5 text-accent" /> Interests & Beyond Code
             </h3>
